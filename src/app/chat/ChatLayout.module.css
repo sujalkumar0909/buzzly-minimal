@@ -1,0 +1,32 @@
+/* src/app/chat/ChatLayout.module.css */
+.chatLayoutContainer {
+  height: 100vh; /* Fallback if root layout doesn't enforce full height */
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background-default);
+  color: var(--color-foreground-default);
+  overflow: hidden; /* Prevent body scroll, let main content scroll */
+}
+
+.chatLayoutLogo {
+  font-size: 1.15rem; /* Adjusted size */
+  font-weight: 600; /* semi-bold */
+  color: rgb(240,186,57);
+  transition: color 0.15s ease-in-out;
+  letter-spacing: -0.025em; /* Slightly tighter */
+}
+@media (min-width: 640px) { /* sm breakpoint */
+  .chatLayoutLogo {
+    font-size: 1.25rem; /* text-xl */
+  }
+}
+.chatLayoutLogo:hover {
+  color: rgb(170, 140, 45);
+}
+
+.chatLayoutMain {
+  flex: 1 1 0%; /* Takes up all remaining vertical space */
+  display: flex;   /* This will contain sidebar and chat window side-by-side */
+  overflow: hidden; /* Crucial: This main area should not scroll; its children will */
+  height: calc(100vh - 50px); /* Full height minus header */
+}

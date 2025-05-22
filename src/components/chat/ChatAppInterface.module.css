@@ -1,0 +1,140 @@
+/* src/components/chat/ChatAppInterface.module.css */
+.chatAppContainer {
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--color-background-default);
+  color: var(--color-foreground-default);
+  position: relative; /* For absolute positioning of chatArea on mobile */
+}
+
+.sidebar {
+  width: 100%; /* Mobile first: sidebar takes full width */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background-secondary);
+  border-right: 1px solid transparent; /* Transparent on mobile, becomes visible on desktop */
+  padding: 0.75rem 1rem;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease-out; /* Smoother transition */
+  z-index: 10; /* Default stacking context */
+  flex-shrink: 0;
+}
+
+.chatArea {
+  flex-grow: 1; /* Will be used on desktop */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background-default);
+  
+  /* Mobile: positioned absolutely to slide over or be covered */
+  position: absolute;
+  top: 0;
+  left: 0; /* Start aligned with parent */
+  width: 100%;
+  transform: translateX(100%); /* Start off-screen to the right */
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease-in, visibility 0s 0.3s; /* Delay visibility change */
+  z-index: 20; /* Higher z-index when active */
+}
+
+/* --- Mobile View Active State (Chat Window is showing) --- */
+.mobileChatViewActive .sidebar {
+  transform: translateX(-100%); /* Slide sidebar out to the left */
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease-out, visibility 0s 0.3s;
+}
+
+.mobileChatViewActive .chatArea {
+  transform: translateX(0%); /* Slide chat area into view */
+  opacity: 1;
+  visibility: visible;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease-in 0.05s, visibility 0s; /* Slight delay for opacity */
+}
+
+/* --- Desktop View (adjust breakpoint as needed, e.g., sm or md) --- */
+@media (min-width: 640px) { /* sm breakpoint */
+  .sidebar {
+    width: 300px;
+    position: static; /* Back to normal flow */
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+    border-right-color: rgb(50, 50, 50); /* Make border visible */
+  }
+  .chatArea {
+    flex: 1 1 0%;
+    position: static; /* Back to normal flow */
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Ensure mobile active states don't apply on desktop */
+  .mobileChatViewActive .sidebar,
+  .mobileChatViewActive .chatArea {
+    transform: none; /* Override mobile transform */
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media (min-width: 768px) { /* md breakpoint */
+  .sidebar { width: 320px; }
+}
+@media (min-width: 1024px) { /* lg breakpoint */
+  .sidebar { width: 360px; }
+}
+
+
+/* Other existing styles */
+.errorFallback {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 2rem; text-align: center; color: var(--color-error-default);
+    background-color: var(--color-background-default); flex-grow: 1;
+}
+.errorFallback svg { margin-bottom: 1rem; }
+
+.sidebarGeneralError {
+  margin-bottom: 0.5rem; padding: 0.5rem; font-size: 0.75rem; text-align: center;
+  background-color: var(--color-error-background); color: var(--color-error-default);
+  border-radius: var(--border-radius-md); border: 1px solid var(--color-error-default);
+}
+
+.socketStatusContainer { margin-bottom: 0.5rem; }
+.socketStatusText { font-size: 0.65rem; text-align: center; padding: 0.25rem 0.5rem; border-radius: var(--border-radius-sm); text-transform: uppercase; letter-spacing: 0.05em;}
+.statusOnline { background-color: var(--color-success-background); color: var(--color-success-default); border: 1px solid var(--color-success-default); }
+.statusOffline { background-color: var(--color-error-background); color: var(--color-error-default); border: 1px solid var(--color-error-default); }
+
+
+.searchForm { margin-bottom: 1rem; display: flex; align-items: stretch; gap: 0.5rem; }
+.searchInputWrapper { flex-grow: 1; margin-bottom: 0 !important; }
+.searchInput { font-size: 0.875rem; height: 100%; }
+.searchButton {
+  flex-shrink: 0;
+  /* padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important; */
+  /* height: 100%; /* Ensure height matches input - Button size prop handles this */
+}
+.searchButton svg { height: 1rem; width: 1rem; color: rgb(240,186,57); }
+.searchButton:hover:not(:disabled) svg { color: var(--color-foreground-default); }
+.searchError { font-size: 0.75rem; color: var(--color-error-default); margin-bottom: 0.5rem; padding-left: 0.25rem; margin-top: -0.75rem; }
+
+.logoutSection { margin-top: auto; padding-top: 1rem; border-top: 1px solid rgb(50, 50, 50); }
+.logoutButton { font-size: 0.875rem; } /* Styling primarily comes from Button variant='danger' */
+
+.Navbar{
+  width: 100%;
+  display: flex;
+  background-color: var(--color-background-muted);
+  margin-bottom: 15px;
+  border-radius: 15px;
+}
+
+.Navbar img{
+  margin: 5px;
+}

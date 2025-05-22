@@ -1,0 +1,5 @@
+.env.local
+package.json
+tailwind.config.ts
+postcss.config.js
+src/app/globals.css

@@ -1,0 +1,97 @@
+/* src/app/(auth)/AuthLayout.module.css */
+.authLayoutContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-background-default); /* Matching ChatPage login form background */
+  padding: 1rem;
+  color: var(--color-foreground-default);
+}
+
+.authFormWrapper {
+  width: 100%;
+  max-width: 24rem; /* sm:max-w-sm */
+  background-color: var(--color-background-secondary);
+  padding: 1.5rem 2rem; /* p-6 sm:p-8 */
+  border-radius: var(--border-radius-lg); /* rounded-xl */
+  box-shadow: var(--shadow-xl);
+  border: 1px solid rgb(50, 50, 50);
+}
+
+.logoContainer {
+  text-align: center;
+  margin-bottom: 2rem; /* mb-8 */
+}
+
+.logoLink {
+  font-size: 2.25rem; /* text-4xl approx. */
+  font-weight: 700; /* bold */
+  color: rgb(240,186,57);
+  letter-spacing: -0.025em; /* tracking-tight */
+  transition: color 0.15s ease-in-out;
+  text-decoration: none;
+}
+.logoLink:hover {
+  color: rgb(170, 140, 45);
+}
+
+.tagline {
+  font-size: 0.75rem; /* text-xs */
+  color: rgb(30, 30, 30);
+  margin-top: 0.375rem; /* mt-1.5 */
+}
+
+.authForm { /* Common form styling for login/signup */
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem; /* space-y-5 (Tailwind space-y-5 = 1.25rem) */
+}
+.authForm h2 {
+    font-size: 1.5rem; /* text-2xl */
+    line-height: 2rem;
+    font-weight: 700; /* bold */
+    text-align: center;
+    color: var(--color-foreground-default); /* Or brand color if preferred */
+    margin-bottom: 1rem; /* Default for form title */
+}
+
+
+.errorMessage { /* Used by SignupForm/LoginForm if they pass error state up or display their own */
+  text-align: center;
+  color: var(--color-error-default);
+  background-color: var(--color-error-background);
+  padding: 0.75rem; /* p-3 */
+  border-radius: var(--border-radius-md);
+  font-size: 0.875rem; /* text-sm */
+  border: 1px solid var(--color-error-default); /* Or var(--color-error-default)/30 */
+}
+
+.formLinkPrompt {
+  text-align: center;
+  font-size: 0.75rem; /* text-xs */
+  color: rgb(30, 30, 30);
+  padding-top: 0.25rem; /* pt-1 or pt-2 */
+}
+.formLink { /* For "Log In" or "Sign Up" links within form prompts */
+  font-weight: 500; /* medium */
+  color: rgb(240,186,57);
+}
+.formLink:hover {
+  color: rgb(170, 140, 45);
+  text-decoration: underline;
+}
+
+.footerText {
+  margin-top: 2.5rem; /* mt-10 */
+  font-size: 0.75rem; /* text-xs */
+  color: rgb(30, 30, 30);
+  text-align: center;
+}
+
+.authButton { /* Class for form submit buttons */
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-size: 0.875rem; /* text-sm or text-base */
+}

@@ -1,0 +1,145 @@
+/* src/components/chat/ChatWindow.module.css */
+/* ... (Keep .chatWindowContainer, .chatHeader, .headerUserInfo, etc., from previous version) ... */
+.chatWindowContainer { display: flex; flex-direction: column; height: 100%; background-color: var(--color-background-default); overflow: hidden;}
+.chatHeader { background-color: var(--color-background-secondary); padding: 0.75rem 1rem; border-bottom: 1px solid rgb(50, 50, 50); box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center; height: 50px; flex-shrink: 0; }
+.headerUserInfo { display: flex; align-items: center; gap: 0.75rem; }
+.headerUserName { font-size: 0.9rem; line-height: 1.25; font-weight: 600; color: var(--color-foreground-default); }
+.headerLeftControls {display:flex;}
+@media (min-width: 640px) { .headerUserName { font-size: 1rem; } }
+.headerUserUsername { font-size: 0.75rem; color: var(--color-foreground-secondary); margin-top: -0.125rem; }
+.headerActions { display: flex; align-items: center; min-width: 40px; justify-content: flex-end; }
+.refreshButton { color: var(--color-foreground-secondary); padding: 0.375rem !important; height: 2rem !important; width: 2rem !important; }
+.refreshButton:hover { color: var(--color-foreground-default); background-color: rgb(50, 50, 50) !important; }
+.refreshButton:disabled svg { opacity: 0.5; }
+
+.messagesArea {
+  flex-grow: 1;
+  padding: 1rem 0.75rem; /* Horizontal padding slightly less than vertical */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  /* gap: 0.125rem; Remove direct gap, handle with messageRow margin */
+}
+/* Custom scrollbar for this specific area, if globals.css one is not enough */
+.messagesArea::-webkit-scrollbar { width: 5px; }
+.messagesArea::-webkit-scrollbar-thumb { background-color: rgb(30, 30, 30); border-radius: 3px; }
+.messagesArea::-webkit-scrollbar-track { background-color: transparent; }
+
+
+.loadMoreTrigger { height: 2.5rem; display: flex; align-items: center; justify-content: center; padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.initialLoadSpinnerContainer { display: flex; align-items: center; justify-content: center; height: 100%; padding-top: 2.5rem; }
+.noMessagesText { text-align: center; color: var(--color-foreground-secondary); font-size: 0.875rem; margin-top: 2.5rem; padding-top: 2.5rem; }
+
+.dateSeparatorContainer { text-align: center; margin-top: 0.75rem; margin-bottom: 0.75rem; position: sticky; top: 0.5rem; z-index: 1; align-self: center; }
+.dateSeparatorText { font-size: 0.7rem; /* Smaller */ color: var(--color-foreground-secondary); background-color: var(--color-background-secondary); /* Contrast against main chat bg */ padding: 0.2rem 0.6rem; border-radius: var(--border-radius-lg); /* More pill-like */ box-shadow: var(--shadow-sm); }
+
+/* --- Updated Message Bubble Styles --- */
+.messageRow {
+  display: flex;
+  margin-bottom: 0.5rem; /* Increased default gap between messages/groups */
+  max-width: 75%; /* Max width of the bubble relative to container */
+}
+.messageRowGrouped { /* For consecutive messages from same user */
+    margin-bottom: 0.125rem; /* Tighter spacing */
+}
+
+.messageRowSent {
+  justify-content: flex-end;
+  align-self: flex-end; /* Make the row itself align to end */
+  margin-left: auto;  /* Push to the right */
+}
+.messageRowReceived {
+  justify-content: flex-start;
+  align-self: flex-start; /* Make the row itself align to start */
+  margin-right: auto; /* Push to the left */
+}
+.messageRowSeparator { margin-top: 0.25rem; } /* Keep for spacing after date */
+
+.messageBubble {
+  padding: 0rem 0.75rem; /* p-2 px-3: Adjusted padding */
+  border-radius: var(--border-radius-lg); /* Softer, larger radius */
+  box-shadow: var(--shadow-sm);
+  font-size: 0.875rem; /* text-sm */
+  line-height: 1;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap; /* To respect newlines in messages */
+  position: relative; /* For potential pseudo-elements like tails (not implemented here) */
+  min-width: 60px; /* Prevent very small bubbles */
+}
+
+.messageBubbleSent {
+  background-color: rgb(240,186,57);
+  color: #121212;
+  font-weight: 500;
+  /* Tailored corners for sent messages */
+  border-bottom-right-radius: 0;
+}
+
+.messageBubbleReceived {
+  background-color: var(--color-background-secondary);
+  color: var(--color-foreground-default);
+  /* Tailored corners for received messages */
+  border-bottom-left-radius: 0;
+}
+
+.messageInfo {
+  display: flex;
+  justify-content: flex-end; /* Aligns timestamp (and status) to the right */
+  align-items: center;
+  margin-top: 0rem; /* Reduced margin for tighter info block */
+  gap: 0.25rem;       /* Space between status and timestamp */
+}
+
+.messageTimestamp {
+  font-size: 0.625rem; /* text-[0.625rem] - Even smaller for subtlety */
+  padding-bottom: 5px;
+  opacity: 0.75; /* Slightly more visible than 0.6 or 0.8 */
+}
+.messageTimestampSent {
+  color: #121212; /* A very light, almost white-blue for contrast on brand color */
+}
+.messageTimestampReceived {
+  color: snow;
+}
+
+.statusSending { color: rgb(30, 30, 30); }
+.statusFailed { color: var(--color-error-default); } /* Already uses theme error */
+
+
+/* Message Input Footer (from previous code - assumed correct) */
+.messageInputFooter { background-color: var(--color-background-secondary); padding: 0.625rem 0.75rem; border-top: 1px solid rgb(50, 50, 50); margin-top: auto; position: sticky; bottom: 0; z-index: 5; }
+@media (min-width: 640px) { .messageInputFooter { padding: 0.75rem 1rem; } }
+.messageInputForm { display: flex; align-items: center; gap: 0.5rem; }
+.messageInputField { /* For the Input component's own className prop */ flex-grow: 1; padding: 0.5rem 0.875rem; /* py-2 px-3.5 */ background-color: var(--color-background-default); /* Input field distinct from footer */ border: 1px solid rgb(50, 50, 50); border-radius: var(--border-radius-lg);  color: var(--color-foreground-default); }
+.sendButton { /* For the Button component's className prop */ padding: 0.5rem !important; /* Tailwind p-2ish */ height: 2.25rem; /* Approx h-9 */ width: 2.25rem; /* Approx w-9 */ /* variant will handle bg/text color */ }
+.sendButton svg { height: 1rem; width: 1rem; /* Tailwind h-4/w-4 or h-5/w-5 */ }
+
+/* Placeholder styles (from previous code - assumed correct) */
+.noUserSelectedContainer { flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--color-foreground-secondary); padding: 2rem; text-align: center; background-color: var(--color-background-default); }
+.noUserSelectedIcon { height: 4rem; width: 4rem; margin-bottom: 1.5rem; color: rgb(50, 50, 50); }
+.noUserSelectedTitle { font-size: 1.25rem; font-weight: 600; }
+.noUserSelectedSubtitle { margin-top: 0.5rem; font-size: 0.75rem; }
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  /* min-width to prevent layout shift was here for typing indicator,
+     can adjust if only refresh button is present */
+  min-width: 40px; /* Space for a button */
+  justify-content: flex-end;
+}
+
+.refreshButton {
+  color: var(--color-foreground-secondary); /* Subtle color */
+  padding: 0.375rem !important; /* Override button's default padding for icon size */
+  height: 2rem !important; /* Control height */
+  width: 2rem !important; /* Control width */
+}
+.refreshButton:hover {
+  color: var(--color-foreground-default);
+  background-color: rgb(50, 50, 50) !important; /* Override default ghost hover */
+}
+.refreshButton:disabled svg {
+    opacity: 0.5;
+}

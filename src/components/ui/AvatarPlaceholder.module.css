@@ -1,0 +1,20 @@
+/* src/components/ui/AvatarPlaceholder.module.css */
+.avatarBase {
+  border-radius: 9999px; /* rounded-full */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500; /* medium */
+  color: white;
+  user-select: none;
+  flex-shrink: 0;
+  /* border: 1px solid rgba(0,0,0,0.2); In dark mode this might not look good */
+  box-shadow: var(--shadow-sm);
+}
+
+/* Sizes */
+.sizeXs { height: 1.25rem; width: 1.25rem; font-size: 0.6rem; }  /* 20px, text-[0.6rem] */
+.sizeSm { height: 1.5rem; width: 1.5rem; font-size: 0.7rem; }   /* 24px, text-[0.7rem] */
+.sizeMd { height: 2rem; width: 2rem; font-size: 0.75rem; line-height: 1rem; } /* 32px, text-xs sm:text-sm equivalent */
+.sizeLg { height: 2.5rem; width: 2.5rem; font-size: 0.875rem; line-height: 1.25rem;} /* 40px, text-sm sm:text-base */
+.sizeXl { height: 3rem; width: 3rem; font-size: 1rem; line-height: 1.5rem;}     /* 48px, text-base sm:text-lg */
