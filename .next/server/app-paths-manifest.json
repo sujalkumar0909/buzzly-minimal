@@ -1,0 +1,15 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/auth/logout/route": "app/api/auth/logout/route.js",
+  "/api/auth/signup/route": "app/api/auth/signup/route.js",
+  "/api/conversations/route": "app/api/conversations/route.js",
+  "/api/auth/login/route": "app/api/auth/login/route.js",
+  "/api/messages/[chatId]/route": "app/api/messages/[chatId]/route.js",
+  "/api/messages/[chatId]/updates/route": "app/api/messages/[chatId]/updates/route.js",
+  "/api/messages/send/route": "app/api/messages/send/route.js",
+  "/api/users/search/route": "app/api/users/search/route.js",
+  "/page": "app/page.js",
+  "/signup/page": "app/signup/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/chat/page": "app/chat/page.js"
+}
